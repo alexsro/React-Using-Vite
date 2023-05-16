@@ -1,7 +1,7 @@
-import Card from "./components/Card"
+import Movies from "./pages/movies/movies"
 
 function App() {
-  return <Card text="Card info"/>
+  return <Movies/>
 }
 
 export default App
