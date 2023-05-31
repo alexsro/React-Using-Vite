@@ -1,10 +1,10 @@
-# Coverage directory used by tools like istanbul
-coverage
-*.lcov
-
-# Dependency directories
+.idea/
+.vscode/
+temp/*
+!tmp/gitkeep
+*.txt
 node_modules/
-
-# dotenv environment variables file
-.env
-.env.test
+build/
+temp/
+tmp/*
+!tmp/.gitkeep

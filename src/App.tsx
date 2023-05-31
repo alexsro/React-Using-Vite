@@ -1,7 +1,14 @@
-import Movies from "./pages/movies/movies"
+import React from 'react';
+import { ChakraProvider } from '@chakra-ui/react';
+import { defaultTheme } from './utils/theme';
+import { Movies } from './pages/movies/Movies';
 
-function App() {
-  return <Movies/>
-}
-
-export default App
+export const LuckTicketsApp: React.FC = () => {
+  return (
+    <React.StrictMode>
+      <ChakraProvider resetCSS={true} theme={defaultTheme}>
+        <Movies />
+      </ChakraProvider>
+    </React.StrictMode>
+  );
+};
