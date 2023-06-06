@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
-import { defaultTheme } from './utils/theme';
-import { Movies } from './pages/movies/Movies';
+import { defaultTheme } from './utils/style/theme';
+import { Movies } from './presentation/movies/pages/movies/Movies';
 
 export const LuckTicketsApp: React.FC = () => {
   return (
