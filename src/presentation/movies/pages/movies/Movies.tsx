@@ -39,8 +39,22 @@ export const Movies: React.FC = () => {
     setMaxCards(calcMaxCards());
   };
 
+  const slidePreviousClick = () => {
+    if (slideClicks == 1 && currentPage > 1) {
+      setSlideClicks(1);
+      setCurrentPage(currentPage - 1);
+    } else {
+      setSlideClicks(slideClicks - 1);
+    }
+  };
+
   const slideNextClick = () => {
-    setCurrentPage(2);
+    if (slideClicks * maxCards >= 20) {
+      setSlideClicks(1);
+      setCurrentPage(currentPage + 1);
+    } else {
+      setSlideClicks(slideClicks + 1);
+    }
   };
 
   useEffect(() => {
@@ -55,32 +69,38 @@ export const Movies: React.FC = () => {
         <VStack>
           <Header />
           <HStack flexGrow={1} align="center">
-            <Button bg="transparent">
+            <Button
+              isDisabled={currentPage <= 1 && slideClicks <= 1}
+              bg="transparent"
+              onClick={slidePreviousClick}
+            >
               <FaChevronLeft color="orange" />
             </Button>
             <HStack>
-              {movies.slice(-maxCards).map(m => (
-                <Card
-                  h={500}
-                  w={cardWidth}
-                  overflowY="auto"
-                  color="whiteAlpha.900"
-                  bg="gray.700"
-                  key={m.id}
-                >
-                  <CardHeader minH={180}>
-                    <Heading fontSize={['sm', 'lg', 'xl', '2xl', '3xl']}>
-                      {m.title}
-                    </Heading>
-                  </CardHeader>
-                  <CardBody>
-                    <Box>
-                      <Heading>overview</Heading>
-                      <Text>{m.overview}</Text>
-                    </Box>
-                  </CardBody>
-                </Card>
-              ))}
+              {movies
+                .slice((slideClicks - 1) * maxCards, slideClicks * maxCards)
+                .map(m => (
+                  <Card
+                    h={500}
+                    w={cardWidth}
+                    overflowY="auto"
+                    color="whiteAlpha.900"
+                    bg="gray.700"
+                    key={m.id}
+                  >
+                    <CardHeader minH={180}>
+                      <Heading fontSize={['sm', 'lg', 'xl', '2xl', '3xl']}>
+                        {m.title}
+                      </Heading>
+                    </CardHeader>
+                    <CardBody>
+                      <Box>
+                        <Heading>overview</Heading>
+                        <Text>{m.overview}</Text>
+                      </Box>
+                    </CardBody>
+                  </Card>
+                ))}
             </HStack>
             <Button bg="transparent" onClick={slideNextClick}>
               <FaChevronRight color="orange" />
